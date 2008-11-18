@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package application;
 
@@ -18,17 +14,17 @@ public class Buffer {
     public Buffer(int bufferNumber,int maxSize,int packetSize){
         int packetCount = maxSize / packetSize;
         if (packetCount * packetSize < maxSize){ packetCount++; }
-        this.data = new byte[packetCount][];
-        this.maxSize = maxSize;
+        this.data       = new byte[packetCount][];
+        this.maxSize    = maxSize;
         this.packetSize = packetSize;
-        this.realSize = 0;
+        this.realSize   = 0;
         this.bufferNumber = bufferNumber;
     };
     public Buffer(int bufferNumber,int maxSize,int packetSize, byte[] data){
         int packetCount = maxSize / packetSize;
         if (packetCount * packetSize < maxSize){ packetCount++; }
-        this.data = new byte[packetCount][];
-        this.maxSize = maxSize;
+        this.data       = new byte[packetCount][];
+        this.maxSize    = maxSize;
         this.packetSize = packetSize;
         this.bufferNumber = bufferNumber;
         Debug.error(maxSize < data.length,"Too much data in buffer");
@@ -75,7 +71,7 @@ public class Buffer {
     }
     public static Buffer[] makeBuffer(int maxSize,int packetSize,byte[] data){
         Buffer[] bufferList = null;
-        int bufferCount = data.length / maxSize;
+        int bufferCount     = data.length / maxSize;
         if (bufferCount*maxSize < data.length){bufferCount++;}
         bufferList = new Buffer[bufferCount];
         int i = 0;
@@ -98,8 +94,8 @@ public class Buffer {
     }
     public static void main(String[] args){
         /*testing the class*/
-        String Message = TestData.SmallText;
-        byte[] Data = Message.getBytes();
+        String Message  = TestData.SmallText;
+        byte[] Data     = Message.getBytes();
         System.out.println(Data.length);
         Debug.showError();
         Buffer[] testBuffers = makeBuffer(30,10,Data);

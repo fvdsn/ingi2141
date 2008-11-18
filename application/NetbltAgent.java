@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package application;
 
@@ -18,7 +14,7 @@ import message.*;
  * @author fred
  */
 public class NetbltAgent extends Thread {
-    Hashtable<String,MessageQueue> queue;
+    Hashtable<String,MessageQueue> queue;   //Matches IP&Port to MessageQueues
     private InetAddress localAddress;
     private int localPort;
     private boolean alive = false;
@@ -42,9 +38,7 @@ public class NetbltAgent extends Thread {
         try{
             localAddress = InetAddress.getByName("localhost");
             localSocket = new DatagramSocket(this.localPort,localAddress);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        }catch(Exception e){ e.printStackTrace(); }
 
     }
     public void run(){

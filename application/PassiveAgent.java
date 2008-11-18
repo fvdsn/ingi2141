@@ -1,7 +1,3 @@
-/*
- * The Passive Agent listens for Messages on a MessageQueue,
- * and acts as a data reciever.
- */
 
 package application;
 
