@@ -54,4 +54,17 @@ public class MessageQueue {
         count--;
         return FM;
     }
+    public static void main(String[] args){
+        //test unit for this class
+        MessageQueue MQ = new MessageQueue();
+        System.out.println("waiting 5 sec");
+        MQ.getMessage(5000);
+        System.out.println("stop");
+        System.out.println("getting message from queue");
+        Message M = new Message();
+        MQ.addMessage(M);
+        System.out.println(MQ.getMessage(0).toString());
+        MQ.getMessage(0);
+        System.out.println("should never print");
+    }
 }
