@@ -8,7 +8,7 @@ import java.io.IOException;
  * Both messages are DATA packets corresponding to a given buffer and are sent by the sending NETBLT. 
  * A LDATA packet corresponds to the last packet of a given buffer.
  * 
- * @author Laurent Vanbever - UniversitŽ catholique de Louvain (UCL) - INGI
+ * @author Laurent Vanbever - Universitï¿½ catholique de Louvain (UCL) - INGI
  * @version 1.0 - 06 october 2008
  */
 
@@ -19,7 +19,7 @@ public class Data extends Message {
 	private short packetNumber; // DATA packet identifier
 	private boolean belongsToLastBuffer; // flag set when the buffer that this DATA packet belongs to is the last buffer in the transfer
 	private byte[] payload; // DATA packet payload (i.e. one piece of the file being transferred)
-	
+	public static final int headerLength = 20;
 	public Data() {
 		
 	} // end constructor

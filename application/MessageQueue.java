@@ -26,7 +26,10 @@ public class MessageQueue {
         this.notifyAll();
     }
     synchronized Message getMessage(long timeout){
+        timeout = timeout * 1000;
+        
         if(timeout == 0){
+            Debug.mark("no timeout");
             while(count == 0){
                 try{
                     this.wait();
@@ -35,23 +38,31 @@ public class MessageQueue {
                 }
             }
         }else{
+            Debug.mark("timeout of : "+timeout+" msec");
             long startTime = System.currentTimeMillis();
             while(count == 0){
                 long currentTime = System.currentTimeMillis();
-                if(currentTime > startTime + timeout){
+                long timeout_time = timeout - (currentTime - startTime);
+                if(timeout_time <= 0){
+                    Debug.mark("timed out");
                     return null;
                 }
                 try{
-                    this.wait(timeout - (currentTime - startTime));
+                    
+                    Debug.mark("timeout_time: "+timeout_time);
+                    this.wait(timeout_time);
                 }catch(InterruptedException e){
+                    Debug.mark("interrupted");
                     return null;
                 }
+                Debug.mark("coucou");
             }
 
         }
         Message FM = queue.remove(first);
         first++;
         count--;
+        Debug.mark("returning");
         return FM;
     }
 }

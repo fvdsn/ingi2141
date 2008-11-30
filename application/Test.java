@@ -13,14 +13,19 @@ public class Test {
         Debug.showError();
         Debug.showWarning();
         NetbltAgent Sender = new NetbltAgent(8000,10000,(short)1000,"S   ");
-        NetbltAgent Reciever = new NetbltAgent(6000,5000,(short)250,"Rec  ");
+        Sender.setBurstRate(15);
+        Sender.setBurstSize(8);
+        NetbltAgent Reciever = new NetbltAgent(6000,5542,(short)250,"Rec  ");
         InetAddress IP = null;
         try{
             IP = InetAddress.getByName("localhost");
         }catch(Exception e){
             e.printStackTrace();
         }
-        Reciever.recieve();
-        Sender.send(IP,6000,null); 
+        Reciever.recieve(1);
+        Debug.mark("COUCOU1");
+        Debug.mark("ATTENTIONPLEASE " + Sender.connect(IP,6000));
+        Sender.disconnect(IP, 6000);
+
     }
 }

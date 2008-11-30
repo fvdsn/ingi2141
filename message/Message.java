@@ -8,7 +8,7 @@ import java.io.*;
  * This class is also suitable to represent KEEPALIVE (type 2) and ABORT (type 5) messages as they are identical 
  * to the NETBLT header 
  * 
- * @author Laurent Vanbever - UniversitŽ catholique de Louvain (UCL) - INGI
+ * @author Laurent Vanbever - Universitï¿½ catholique de Louvain (UCL) - INGI
  * @version 1.0 - 06 october 2008
  */
 
@@ -81,6 +81,25 @@ public class Message implements MessageType {
 	public int getType(){
 		return type;
 	}
+    public String getTypeToString(){
+        switch (getType()){
+            case MessageType.ABORT: return "ABORT";
+            case MessageType.DATA: return "DATA";
+            case MessageType.DONE: return "DONE";
+            case MessageType.GO: return "GO";
+            case MessageType.KEEPALIVE: return "KEEPALIVE";
+            case MessageType.LDATA: return "LDATA";
+            case MessageType.NULL_ACK: return "NULL_ACK";
+            case MessageType.OK: return "OK";
+            case MessageType.OPEN: return "OPEN";
+            case MessageType.QUIT: return "QUIT";
+            case MessageType.QUITACK: return "QUITACK";
+            case MessageType.REFUSED: return "REFUSED";
+            case MessageType.RESEND: return "RESEND";
+            case MessageType.RESPONSE: return "RESPONSE";
+            default: return "UNKNOWN";
+        }
+    }
 	
 	public void setType(byte type){
 		this.type = type;
@@ -103,7 +122,7 @@ public class Message implements MessageType {
 		toReturn += "************************\n";
 		toReturn +=	"Checksum: " +checksum+"\n";
 		toReturn += "Version: " +version+"\n";
-		toReturn += "Type: " +type+"\n";
+		toReturn += "Type: " +getTypeToString()+"\n";
 		toReturn += "Length: " +length+"\n";
 		return toReturn;
 	}

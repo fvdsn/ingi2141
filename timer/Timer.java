@@ -32,12 +32,17 @@ public abstract class Timer extends Thread
 
 	private boolean finished = false;
 
-
+    public Timer(){
+        m_length = 1000;
+        m_elapsed = 0;
+        cur_tries = 0;
+        this.max_tries = 10;
+    }
 	/**
 	 * Creates a timer of a specified length
 	 * @param	length	Length of time before timeout occurs
 	 */
-	public Timer (int length, int max_tries) {
+	public Timer(int length, int max_tries){
 		// Assign to member variable
 		m_length = length;
 
@@ -50,7 +55,10 @@ public abstract class Timer extends Thread
 		// Set maximum tries before giving up
 		this.max_tries = max_tries;
 	}
-
+    public synchronized void initialize(int length,int max_tries){
+        m_length = length;
+        this.max_tries = max_tries;
+    }
 	/** Stop the timer */
 	public synchronized void stopTimer() 
 	{
@@ -90,7 +98,7 @@ public abstract class Timer extends Thread
 				if (m_elapsed > m_length)
 				{
 					if(!finished) {
-						if(cur_tries < max_tries) {
+						if(max_tries < 0 || cur_tries < max_tries) {
 							// Trigger a timeout
 							cur_tries ++;
 							m_elapsed = 0;
